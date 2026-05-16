@@ -96,3 +96,20 @@ _Maintained by `automotive-skills-daily-standup` scheduled task._
 - Tomorrow (Sun) is TRIAGE — service issue #2 with the "needs human triage" treatment (don't label below 80% confidence), and add the 30+-day quiet comment to anything stale (currently nothing in the open set is 30+ days old, so this should be a near-no-op).
 - W21 PLAN on Monday should land the scripted suite-wide trigger-coverage audit that the three POLISH passes this week have been pointing at, plus carry forward `8d-problem-solving-builder.skill` (issue #6) since it didn't get a POLISH pass this week.
 - Watch for future weeks where a `feat:` or `fix:` lands so RELEASES.md grouping starts exercising those buckets — current template handles them but they have not appeared yet.
+
+
+## 2026-05-16 (autonomous run, RELEASE — same-day re-run, no-op release)
+
+**Mode:** RELEASE (re-run)
+**Action:** Detected that today's scheduled RELEASE pass already executed earlier (commit `766d56f` at 10:26 UTC: tag `v2026.05.W20` cut, `RELEASES.md` opened, STATUS regenerated, journal entry written). Per spec — "Confirm via `git tag -l` that it doesn't exist" — skipped re-tagging. Per spec — "ALWAYS commit at least one commit per run" — this journal entry is the commit content. STATUS.md was regenerated as a sanity check; the diff surfaced two classifier disagreements (`msa-gage-rr-builder` and `safety-plan-builder`) between this run's strict-spec-style classifier and the prior agent's classifier. Rather than ship a same-day STATUS that flips established domain labels, the regenerated STATUS was reverted and the disagreement is logged for human review (see follow-ups).
+**Files touched:**
+- `docs/AUTONOMOUS_LOG.md` (this entry — sole commit content)
+**Tests:** N/A (no test suite in this repo yet)
+**Skill count:** 76 builders / 76 reviewers / 100.0% paired (alias map unchanged: `item-definition-builder ↔ item-def-checklist-reviewer`, `ppap-package-builder ↔ ppap-checklist-reviewer`)
+**Open issues:** 5 (#2 untriaged + #3 hara, #4 cs-concept, #5 aspice serviced this week, #6 8d carries to W21 — identical to the 10:26 UTC run)
+**Notes:** Two scheduled runs landed on the same calendar day. The first run handled the week's real release work correctly (RELEASES.md `v2026.05.W20` section is intact, tag exists, push succeeded). This second run had no new release work to do and consciously did not re-tag, did not append another section to RELEASES.md, and did not bump the STATUS header. A small classifier honesty problem also surfaced: re-reading the spec, `safety-*` is the safety domain prefix, which means `safety-plan-builder` should classify as `safety`, not `program-mgmt` (prior) and not `other` (my naive regex). The spec's quality list (`apqp/dfmea/pfmea/ppap/control-plan`) likewise omits `msa-`, `5-why`, `8d-`, `spc-` — so under a literal read most of the "quality" rows are actually "other". Both classifiers (prior and today's) drift from the spec in opposite directions. Not unilaterally re-labeling 10+ rows in a same-day re-run; flagging for the W21 PLAN to land a canonical classifier as a first-class target.
+**Follow-ups:**
+- W21 PLAN (Mon) should add a target: "freeze the STATUS classifier — write `scripts/classify_skill.py` that implements the spec literally, with explicit override entries for the (currently 2) names where a literal read produces a worse answer than human judgement". Until that lands, the existing STATUS body is the canonical reference, not the spec text.
+- Verify tomorrow's TRIAGE run still sees `v2026.05.W20` on origin and that the human has had a chance to click Publish on the GitHub Release.
+- No action on issues this run (TRIAGE is the right venue, not RELEASE re-run).
+- Worth a one-line note on the human side: scheduled task fired twice today. If that was unintentional, the cadence-runner config probably needs a "skip if already ran today" guard.
