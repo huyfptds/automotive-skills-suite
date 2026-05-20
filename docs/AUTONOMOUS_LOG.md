@@ -168,3 +168,21 @@ Classifier regression caught and fixed during STATUS regen: my first pass had a 
 - Thu POLISH: pick between #8 (autosar-swc) and #9 (uds-services). Recommend #9 uds-services — it's the diagnostics anchor and the spec's strict-trigger demand list (canonical service IDs 0x10/0x11/...) is the longest of any W21 target, so the description is the most likely to drift.
 - W21 target #5 (classifier freeze) still unserviced. If Wed/Thu cycle time permits, slot it in as a fourth POLISH; otherwise it carries to W22. Three consecutive runs have now hit classifier bugs that would have been caught by the golden-file test.
 - Issue #2 ("goodd", empty body) still open and needs-triage; un-actioned again — POLISH is the wrong venue. Flag this for the human if it's still open by Saturday's RELEASE.
+
+## 2026-05-20 (autonomous run, POLISH)
+
+**Mode:** POLISH (Wednesday)
+**Action:** Polished `dbc-builder.skill` per W21 target #2 (issue #7, comms cluster). Wrote `docs/skill-polish-log/dbc-builder.md` (180 lines). Regenerated STATUS.md (header date/note diff only — no skill-file mtimes changed). No edits applied to the .skill archive itself.
+**Files touched:** STATUS.md, docs/skill-polish-log/dbc-builder.md, docs/AUTONOMOUS_LOG.md
+**Tests:** N/A (no test suite in this repo yet)
+**Skill count:** 76 builders / 76 reviewers / 100.0% paired
+**Open issues:** 9 (#2 needs-triage + #3-#6 W20 targets + #7-#10 W21 targets)
+**Notes:** As predicted in yesterday's 8d log and follow-up, the W20 trigger-coverage-drift pattern resumed for the comms cluster — and intensified. dbc-builder misses TWO DoD-required trigger phrases, not one: "DBC file" (description has only "DBC"/"Vector DBC") and "Vector CANdb" (description says "Vector DBC"). "signal definition" only reaches the description as a substring of "signal definitions", not as an explicit trigger-list entry. Description is 674/1024 chars (healthy headroom); frontmatter complete; the "11-tab xlsx" claim was cross-checked against `generate_dbc.py` and is exact (00_Title_Page through 10_References, 11 create_sheet calls). Drafted a 741-char proposed rewrite that folds in "DBC file", "Vector CANdb", "signal definition", and the casual phrasing "define CAN messages" while preserving every existing phrase — under the 1024 cap. Per the autonomous-edit allowlist (typo / over-length / missing-required-field only), the rewrite was NOT committed; consistent with the 8d pass, it stays in the polish log for human review.
+
+Standout finding is non-DoD and more impactful than the trigger gaps: the SKILL.md "Files in this skill" tree advertises `examples/sample_input_can.json` ("full example to clone for new projects"), but extracting the `.skill` ZIP shows NO `examples/` directory at all — the archive ships 7 files, all under `references/` and `scripts/`. Step 3 of the workflow leans on cloning that worked example. Contrast: yesterday's 8d-problem-solving-builder archive DOES ship a populated `examples/sample_8d_input.json`. So this is dbc-builder-specific packaging drift, not a suite-wide convention change. Severity medium; remedy is either bundle a real CAN example JSON (preferred — brings it to suite parity) or drop the `examples/` line from the tree. Left for human review — authoring a new example file is outside the POLISH edit allowlist.
+
+**Follow-ups:**
+- Thu POLISH: per yesterday's recommendation, take #9 uds-services-builder (diagnostics anchor, longest strict-trigger demand list of any W21 target). When extracting that archive, explicitly diff the SKILL.md "Files in this skill" tree against actual ZIP contents — the dbc-builder `examples/` miss may be cluster-wide and a one-line diff catches it cheaply.
+- W21 target #5 (classifier freeze, `scripts/classify_skill.py` + golden-file test) still unserviced — carries forward. Three+ consecutive runs have hit classifier/regen bugs this would prevent.
+- Issue #8 (autosar-swc) will not get a pass this week if Thu services #9 — it carries to W22 PLAN. Note in Saturday's RELEASE notes.
+- Issue #2 ("goodd", empty body) still open and needs-triage — un-actioned again. POLISH is the wrong venue; flag for the human at Saturday's RELEASE if still open.
