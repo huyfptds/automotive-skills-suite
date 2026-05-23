@@ -1,6 +1,6 @@
 # Automotive Skills Suite — STATUS
 
-_Generated: 2026-05-22 by autonomous daily run (DOCS mode)._
+_Generated: 2026-05-23 by autonomous daily run (RELEASE mode)._
 
 **Builders:** 76 · **Reviewers:** 76 · **Paired:** 76/76 (100.0%)
 
@@ -89,4 +89,4 @@ _Generated: 2026-05-22 by autonomous daily run (DOCS mode)._
 - Flags: 🟢 76 fresh · 🟡 0 stale (>30d) · 🔴 0 unpaired
 - Domain spread: safety=14, quality=8, comms=8, program-mgmt=6, cyber=6, autosar=5, diagnostics=5, v&v=5, aspice=4, sysml=4, calibration=3, mbse=3, sotif=3, other=2
 - All builders carry a paired confirmation reviewer; pairing contract intact.
-- Classifier note: domain map preserved from W20 canonical STATUS; deterministic classifier script still a W21 follow-up.
+- Domain map preserved from W20 canonical STATUS; deterministic classifier script still an open follow-up.

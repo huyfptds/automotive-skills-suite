@@ -51,3 +51,49 @@ ISO week 20 (2026-05-11 → 2026-05-16). First weekly snapshot of the autonomous
 ### Notes for the human
 
 Click Publish on the v2026.05.W20 tag on GitHub once you've skimmed this section. Issue #2 (`goodd`) is the one item Sunday's TRIAGE pass should probably still escalate to you — autonomous run is intentionally not labeling or commenting it because confidence is well below 80%.
+
+---
+
+## v2026.05.W21 — 2026-05-23
+
+ISO week 21 (2026-05-18 → 2026-05-23). Second weekly snapshot — W21 polish cycle closed; CHANGELOG and the first `examples/` doc stubs landed.
+
+### Highlights
+
+- W21 polish ran the full Tue/Wed/Thu cadence over `8d-problem-solving-builder`, `dbc-builder`, and `autosar-swc-builder`; the autosar-swc pass shipped an actual in-allowlist description fix, the other two produced severity-rated polish-log findings held for human review.
+- `CHANGELOG.md` introduced and the first `examples/<skill>/README.md` stubs added — the repo now has a docs spine beyond STATUS.
+- Suite steady at 76 builder + 76 reviewer pairs, 100% paired; no flag changes vs. W20.
+
+### Changes this week
+
+**plan**
+- `3320c23` auto(plan): W21 targets — 8d carryover, dbc, autosar-swc, uds-services, classifier-freeze
+
+**polish**
+- `e8ff3b2` auto(polish): W21 #6 8d-problem-solving-builder pass, regen STATUS.md
+- `76b2fff` auto(polish): W21 #7 dbc-builder pass, regen STATUS.md
+- `387bbcd` auto(polish): W21 #8 autosar-swc-builder pass — description fix applied, STATUS regen
+
+**docs**
+- `1a5ca80` auto(docs): add CHANGELOG, W21 example README stubs, regen STATUS
+
+**docs / release** _(this snapshot commit)_
+- STATUS.md refreshed (no flag changes vs. prior run)
+- RELEASES.md updated with the W21 section
+- CHANGELOG.md `[Unreleased]` rolled into a dated `[v2026.05.W21]` section
+- `docs/AUTONOMOUS_LOG.md` updated with the RELEASE-mode entry
+
+### Skills inventory
+
+- Builders: **76** · Reviewers: **76** · Paired ratio: **100.0%** (76/76)
+- Domain spread: safety 14, quality 8, comms 8, program-mgmt 6, cyber 6, autosar 5, diagnostics 5, v&v 5, aspice 4, sysml 4, calibration 3, mbse 3, sotif 3, other 2
+
+### Compare
+
+https://github.com/jherrodthomas/automotive-skills-suite/compare/v2026.05.W20...v2026.05.W21
+
+### Open items for the human
+
+- 10 issues open. Issue **#2** ("goodd", empty body) has stayed `needs-triage` across multiple runs — needs a human decision (likely close as spam/invalid).
+- Issue **#11** ("packaging utility for Claude-compatible skill exports") is still unlabeled — Sunday TRIAGE should label it.
+- W21 polish target **#9** (`uds-services-builder`) and tooling target **#10** (classifier freeze) were not serviced this week — both carry to W22.

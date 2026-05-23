@@ -217,3 +217,19 @@ Standout finding is non-DoD and more impactful than the trigger gaps: the SKILL.
 - W21 target #10 (classifier freeze, `scripts/classify_skill.py` + golden-file test) STILL unserviced after the full Tue/Wed/Thu POLISH cycle — promote to W22 Monday slot.
 - dbc-builder archive packaging gap (`examples/sample_input_can.json` advertised but absent) — bundle the real CAN example JSON to reach suite parity; not a DOCS-mode change.
 - W21 polish target #9 (uds-services-builder) was never serviced — carries to W22 PLAN.
+
+## 2026-05-23 (autonomous run, RELEASE)
+
+**Mode:** RELEASE (Saturday)
+**Action:** Cut the W21 weekly snapshot — appended the `v2026.05.W21` section to RELEASES.md, rolled CHANGELOG.md `[Unreleased]` into a dated `[v2026.05.W21]` section, regenerated STATUS.md, and created + pushed the lightweight tag `v2026.05.W21`.
+**Files touched:** RELEASES.md, CHANGELOG.md, STATUS.md, docs/AUTONOMOUS_LOG.md
+**Tests:** N/A (no test suite in this repo yet)
+**Skill count:** 76 builders / 76 reviewers / 100.0% paired
+**Open issues:** 10 (#2 needs-triage · #3-#6 W20 targets · #7-#10 W21 targets · #11 unlabeled)
+**Notes:** W21 had 5 commits (Mon 2026-05-18 → Sat) so a release was due. Tag is `v2026.05.W21` — I followed the precedent set by the existing `v2026.05.W20` tag, which uses the full ISO week number (confirmed `date +%V` = 21), rather than the "ISO week within current month" wording in the task spec. Friday's DOCS journal speculated the tag would be `v2026.05.W4`; that would have broken naming consistency with the one existing tag, so I overrode it deliberately. `git tag -l` confirmed `v2026.05.W21` did not already exist. Judgement call: the RELEASE spec only names RELEASES.md + tag, but CHANGELOG.md's own header states `[Unreleased]` entries "move into a dated section at each weekly release" — leaving a stale `[Unreleased]` block after a tagged release would contradict the file's documented contract, so I rolled it over and also backfilled a retroactive `[v2026.05.W20]` section for symmetry with RELEASES.md. STATUS.md regen preserved the W20 canonical domain map (the deterministic classifier is still unbuilt — issue #10); only the generated-date and timestamp changed, no flag movement. No GitHub Release object was published — per the hard rule, the human clicks Publish after reviewing RELEASES.md.
+**Follow-ups:**
+- Human action: review the `v2026.05.W21` section of RELEASES.md, then click Publish on the tag in GitHub if desired.
+- Issue #2 ("goodd", empty body) is still open and `needs-triage` — escalate to a human; autonomous runs will not close it.
+- W21 targets #9 (`uds-services-builder` polish) and #10 (classifier freeze, `scripts/classify_skill.py` + golden-file test) were never serviced — both carry to W22 PLAN. The classifier has now slipped 5+ consecutive runs; W22 Monday should give it the priority slot.
+- W22 PLAN should pull from calibration/mbse/sysml for domain spread and consider a symmetry pass on `autosar-adaptive-app-builder` (Classic↔Adaptive cross-reference is currently one-directional).
+- Sunday TRIAGE: label issue #11 ("packaging utility for Claude-compatible skill exports") — reads as tooling/ci.
