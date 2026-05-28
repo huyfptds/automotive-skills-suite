@@ -108,3 +108,87 @@ names it). All five DoD triggers + the bonus "concept phase" hit the description
 **No code edits committed in this run.** Issue #3 stays open with this log linked from
 the journal entry. Next autonomous touch on this skill: probably W21 if it stays in the
 LRT bucket, otherwise close on human approval of the rewrite.
+
+---
+
+## 2026-05-28 — W22 POLISH pass (carryover from W20)
+
+**Mode:** POLISH (Thursday)
+**File reviewed:** `skills/hara-builder.skill` (ZIP archive; SKILL.md is 12,273 bytes / 146 lines).
+**Tracking issue:** [#3](https://github.com/jherrodthomas/automotive-skills-suite/issues/3) (open).
+**Plan reference:** target #2 in `docs/weekly/WEEK-2026-W22.md` (carryover from W20).
+
+### File-state check vs. previous pass
+
+The archive has not changed since the W20 pass (`2026-04-28 07:08` mtime on every
+entry inside the `.skill`). The SKILL.md byte size, line count, and frontmatter all
+match what the 2026-05-12 entry above recorded. So everything that was true then is
+still true now — no regressions, no drift.
+
+Re-ran the trigger-coverage check fresh against the current file rather than trusting
+the prior log:
+
+| DoD check (W20) | This pass |
+|---|---|
+| Description ≤ 1024 chars | **PASS** — 911 chars (unchanged) |
+| Frontmatter has required fields (`name`, `description`) | **PASS** |
+| `HARA` in first 400 chars | **PASS** — char 71 |
+| `hazard analysis` in first 400 chars | **PASS** — char 34 |
+| `ASIL` in first 400 chars | **PASS** — char 285 |
+| `item definition` in first 400 chars | **PASS** — char 94 |
+| `safety goal` in first 400 chars | **FAIL** — char 454 (same gap the W20 pass found) |
+| `ISO 26262` in first 400 chars | **PASS** — char 24 |
+| `concept phase` (bonus, not strict DoD) | **FAIL** — char 672 |
+
+Also did a fresh typo scan (`teh recieve seperate occured definately accomodate
+begining wether`) — no hits. Step headers all use em-dashes consistently (Step 1
+through Step 5). Archive file tree matches the "Files in this skill" block at the
+bottom of SKILL.md exactly (cross-checked against `unzip -l`).
+
+### Autonomous-edit allowlist decision
+
+The autonomous-edit allowlist is narrow: **typo / description > 1024 chars / missing
+required frontmatter field**. None of the three conditions hold here. The only open
+DoD gap — `safety goal` reordered into the first 400 chars — is an editorial sentence
+re-ordering, not a surgical fix. Per the standing rule ("NEVER do large refactors —
+small and shipped beats big and broken"), I am leaving the .skill file untouched.
+
+**No edits committed in this run.** The proposed rewrite from the 2026-05-12 entry
+above remains the recommended human action.
+
+### Why not just apply the W20-proposed rewrite this run?
+
+Two reasons. (a) The proposed rewrite touches ~600 chars of the 911-char description
+— that crosses the line from "small obvious fix" into "editorial restructure," which
+the spec reserves for human review. (b) The rewrite was drafted two POLISH cycles
+ago and the suite-wide trigger-coverage pattern (hara, cs-concept, aspice — three
+in a row, see notes at the bottom of the W20 entries) has been flagged for a
+suite-wide DoD audit in W21/W22 PLANs. A point fix here would short-circuit that
+audit before it lands.
+
+### Severity roll-up (unchanged from W20)
+
+| Finding | Severity | Action |
+|---|---|---|
+| `safety goal` outside first 400 chars | low | proposed rewrite drafted in W20 entry; await human review |
+| Long "Produces..." enumeration clause | low | folded into the same proposed rewrite |
+| No `concept phase` trigger up front | low (optional) | folded into the same proposed rewrite |
+
+### Follow-ups for the human
+
+1. **Approve or modify the W20 proposed rewrite of the description** (block quote near
+   the end of the 2026-05-12 entry). If approved, it can land as a one-shot edit and
+   issue [#3](https://github.com/jherrodthomas/automotive-skills-suite/issues/3)
+   closes the same day.
+2. **Decide whether the suite-wide trigger-coverage DoD audit is W23 PLAN-eligible.**
+   Three consecutive POLISH passes (hara → cs-concept → aspice) have shipped the
+   same shape; one focused audit pass is cheaper than chasing individual skills.
+3. **Optional:** consider adding `concept phase` to the canonical trigger phrase
+   list applied during the audit, since the same gap is likely present on
+   `fsc-builder` and `tsc-builder` too.
+
+This is the second POLISH visit to `hara-builder` and the file is unchanged between
+visits. If the human review of the W20 rewrite does not land before next month,
+the LRT rotation will surface this skill a third time — recommend either closing
+issue #3 with a "won't fix (within autonomous scope)" note, or merging the W20
+rewrite, to break the loop.

@@ -292,3 +292,18 @@ Standout finding is non-DoD and more impactful than the trigger gaps: the SKILL.
 - Fri DOCS run should roll W22 polish commits into CHANGELOG.
 - Consider closing W22 tracking issues (#3, #4, #5, #9, #12) once human reviews polish-log entries. Auto-runs do NOT close issues per hard rules.
 - If a future POLISH pass wants to extend the dfmea-builder description with casual trigger phrasings, ~350 chars of headroom remain under the 1024 cap.
+
+## 2026-05-28 (autonomous run, POLISH)
+
+**Mode:** POLISH
+**Action:** W22 #2 hara-builder polish pass — re-evaluated against current archive, appended W22 dated section to existing polish-log, no .skill edits applied per autonomous-edit allowlist.
+**Files touched:** docs/skill-polish-log/hara-builder.md (appended), STATUS.md (regen — date-stamp delta only, underlying skill data unchanged), docs/AUTONOMOUS_LOG.md (this entry)
+**Tests:** N/A (no test suite in this repo yet)
+**Skill count:** 76 builders / 76 reviewers / 100% paired
+**Open issues:** 11
+**Notes:** Picked hara-builder per W22 plan target #2 (issue #3, three-week carryover) — yesterday's dfmea entry overstated W22 coverage when it claimed "W22 polish phase effectively complete." Three of the W22 plan targets (hara, cs-concept, aspice-assessment) had only W20-dated polish-log entries, and the W22 plan DoD explicitly asks for a fresh per-skill audit. Today's pick was hara because: (a) issue #3 is the longest-open polish issue, (b) all three remaining carryovers shared a last-touched date so plan order broke the tie, (c) hara has the densest SKILL.md of the three. Re-ran the trigger-coverage and char-count checks against the current archive — file is byte-identical to the W20 inspection (`2026-04-28 07:08` mtime preserved), so the W20 findings still stand: description 911/1024 chars, frontmatter clean, 6 of 7 strict trigger phrases inside the 400-char window, "safety goal" misses at char 454. The W20 entry already drafted an editorial rewrite that would close all three open findings; today's entry refrains from applying it because the change exceeds the autonomous-edit allowlist (typo / over-length / missing required field) and the suite-wide trigger-coverage DoD audit flagged in earlier passes is the better vehicle. STATUS regen: hit the same `item-definition→item-def` and `ppap-package→ppap` pairing alias overrides; preserved both to keep 76/76 paired headline intact (this is the 4th run where the overrides have been needed; issue #10 to freeze the classifier remains open).
+**Follow-ups:**
+- Tomorrow (Fri) DOCS: roll W22 polish commits (uds, dfmea, hara) into CHANGELOG; create example/<skill>/README.md stubs for the three touched skills if absent.
+- Open issues #3, #4, #5, #9, #12 all now have W22 polish-log coverage (or in the case of #4/#5 still need a fresh W22 visit) — flag for human triage at human convenience. Auto-runs do NOT close issues per hard rules.
+- cs-concept (#4) and aspice-assessment (#5) still owe a W22-dated polish-log entry; depending on Fri DOCS and Sat RELEASE workload, one or both may slip to W23 — accept and move on.
+- Issue #10 (classifier freeze) is now 7 runs old; STATUS.md generator is still ~50 lines of inline Python in each commit. Strongly recommend Mon W23 PLAN allocate one tooling slot to extract `scripts/classify_skill.py` so future POLISH runs can `python scripts/classify_skill.py > STATUS.md` instead of carrying the alias map by hand.
