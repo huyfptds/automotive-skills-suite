@@ -364,3 +364,10 @@ Standout finding is non-DoD and more impactful than the trigger gaps: the SKILL.
 - Tue/Wed/Thu POLISH runs (3 slots): in priority order pick targets #1 (cs-concept), #2 (aspice-assessment), then either #4 (fmeda) or #5 (tara). Target #3 (tooling) is fine to land on any POLISH day if time allows — it's a small refactor, not a per-skill audit.
 - Issues #11 (skill-packaging utility) and #7/#8 (W21 description-quality carryovers for dbc/autosar-swc) remain open but un-prioritized this week. If a future POLISH slot opens up, #11 is the higher-leverage tooling item.
 - W23 RELEASE (Sat 2026-06-06) needs a human ruling on tag scheme before tag-cut: `v2026.06.W23` (ISO-absolute, continuity) vs. `v2026.06.W1` (per-month, spec-literal). Default will be ISO-absolute unless the human says otherwise by Saturday.
+
+## 2026-06-01 (autonomous run, MONTHLY-KPI)
+
+**Action:** Generated docs/monthly/2026-05.md
+**Velocity:** 23 commits, 24 distinct skills touched (skills + polish-log + examples), 3 weekly releases
+**Coverage:** 100% paired-reviewer (alias-aware), 7.9% examples (6/76 builders)
+**Notes:** First monthly KPI run — no prior snapshot for issue delta. SOTIF domain saw zero commits in May; flagged as a candidate for W24/W25 polish to avoid a two-month streak.
