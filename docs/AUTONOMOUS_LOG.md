@@ -455,3 +455,19 @@ Standout finding is non-DoD and more impactful than the trigger gaps: the SKILL.
 - Mon W24 PLAN: include at least one SOTIF target (sotif-analysis or triggering-conditions) — zero-touch in May per the monthly KPI; a second zero-touch month justifies a tracking issue.
 - Sun TRIAGE (tomorrow): confirm the 13 → 12 issue-count delta (presumed external close of #17) and refresh labels.
 - Fmeda medium findings need maintainer action, esp. the SMvDU source-check against ISO 26262-5:2018 Annex B.
+
+## 2026-06-07 (autonomous run, TRIAGE)
+
+**Mode:** TRIAGE
+**Action:** Sunday triage pass — refreshed labels on all 12 open issues (one label added: `description-quality` to #12), confirmed the 13→12 issue-count delta from Thu/Fri, regenerated STATUS.md.
+**Files touched:** STATUS.md, docs/AUTONOMOUS_LOG.md (this entry)
+**Tests:** N/A (no test suite in this repo yet)
+**Skill count:** 76 builders / 76 reviewers / 100% paired
+**Open issues:** 12
+**Notes:** Label audit found the open set already well-typed: #3-#9, #15, #16 each carry a type (`description-quality`) plus a domain label; #10 and #11 carry `ci`. Only #12 (W22 dfmea-builder polish target) lacked a type label — its body is a frontmatter/description audit, so `description-quality` was added with high confidence. #10 and #11 are repo-wide tooling (`ci`) with no applicable domain label; rather than force a <80%-confidence domain, both are left domain-less and flagged here for human awareness. No stale issues: every open issue was updated 2026-06-03 or later, so zero 30-day auto-triage comments were posted. The Fri/Sat issue-count mystery is resolved: GET /issues/17 returns 404, meaning the CN-language discussion issue was deleted or spam-filtered at the GitHub level (not merely closed) — external action, nothing for the bot to do. STATUS regen reproduced the canonical domain spread (safety=15, quality=10) using the same inline 9-entry explicit map as Sat — ninth consecutive run of hand-maintained inline classification; #10 remains the fix.
+**Follow-ups:**
+- Mon W24 PLAN: land `scripts/classify_skill.py` (#10) — ninth inline regen this run; the explicit map is stable at 9 entries, ready to freeze.
+- Mon W24 PLAN: convert #4 (cs-concept) and #5 (aspice-assessment) from polish loops to maintainer-PR targets per Thu/Fri/Sat journals.
+- Mon W24 PLAN: include one SOTIF target (sotif-analysis or triggering-conditions) — zero-touch domain in May.
+- #11 (packaging utility, external patch attached) needs a human decision — it's been open since 2026-05-22 with a ready patch; bot policy is not to merge external code.
+- Fmeda medium findings (classification-ladder branch, SMvDU acronym, 100x unit convention) still await maintainer action.
